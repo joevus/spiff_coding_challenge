@@ -1,5 +1,12 @@
 # Spiff Engineering Candidate Coding Exercises
 
+## Usage
+
+`ruby calculate_commission.rb Rep_Name Start_date End_date`
+
+Replace Rep_Name with a string of the Sales rep
+Replace Start_date and End_date with a 8061 ISO date string each
+
 ## Purpose
 These coding exercises are meant to help Spiff gain insight into how you would tackle actual development work as part of the team. The exercise is relatively simple, but you are encouraged to treat them as if you were working on the Spiff codebase. **This means applying the same attention to code quality, tests, pull requests, commits, etc as you normally would.** 
 
