@@ -1,8 +1,31 @@
+require_relative "../calculate_commission.rb"
+
 RSpec.describe 'calculate_commission' do
   let(:sales_rep_name) { "Carol"}
   let(:non_existent_name) { "King George V"}
   let(:start_date) { "2023-01-01"}
   let(:end_date) { "2023-03-31"}
+
+  let(:example_deal_data) {
+    [
+      {
+        "id": 1111,
+        "sales_rep_name": "Melissa",
+        "date": "2023-01-15",
+        "quantity_products_sold": 7,
+        "product_id": 20006,
+        "has_2x_multiplier": 0
+      },
+      {
+        "id": 1119,
+        "sales_rep_name": "Melissa",
+        "date": "2023-05-15",
+        "quantity_products_sold": 11,
+        "product_id": 20010,
+        "has_2x_multiplier": 0
+      }
+    ]
+  }
 
   it 'should calculate commission' do
     # Calculation for Carol
@@ -27,37 +50,15 @@ RSpec.describe 'calculate_commission' do
 
   describe 'filter_by_date' do
     it 'should filter deal for date window' do
-      carol_deal_data = deal_data(sales_rep_name)
-      filtered_deal_data = filter_by_date(carol_deal_data, start_date, end_date)
+      filtered_deal_data = filter_by_date(example_deal_data, start_date, end_date)
 
-      expect(filtered_deal_data.length).to eq(3)
+      expect(filtered_deal_data.length).to eq(1)
     end
   end
 
   describe 'product_ids' do
-    let(:deal_data) {
-      [
-        {
-          "id": 1111,
-          "sales_rep_name": "Melissa",
-          "date": "2023-04-15",
-          "quantity_products_sold": 7,
-          "product_id": 20006,
-          "has_2x_multiplier": 0
-        },
-        {
-          "id": 1119,
-          "sales_rep_name": "Melissa",
-          "date": "2023-05-15",
-          "quantity_products_sold": 11,
-          "product_id": 20010,
-          "has_2x_multiplier": 0
-        }
-      ]
-    }
-
     it 'should retrieve product ids' do
-      expect(product_ids(deal_data)).to eq([20006, 20010])
+      expect(product_ids(example_deal_data)).to eq([20006, 20010])
     end
   end
 end
