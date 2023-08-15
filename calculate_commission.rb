@@ -24,3 +24,7 @@ def filter_by_date(deal_data, start_date, end_date)
     date >= start_date && date <= end_date
   end
 end
+
+def product_ids(deal_data)
+  deal_data.map { |deal| deal[:product_id] }
+end
