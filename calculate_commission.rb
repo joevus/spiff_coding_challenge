@@ -8,7 +8,7 @@ def calculate_commission(sales_rep_name, start_date, end_date)
 
   sub_totals = filtered_deals.map do |deal|
     product = product_data(deal["product_id"])
-    product_amount = product[product_amount]
+    product_amount = product["product_amount"]
     product_quantity = deal["quantity_products_sold"]
     commission_rate = product["commission_rate"]
     multiplier = determine_multiplier(deal["has_2x_multiplier"])
@@ -30,8 +30,8 @@ def deal_data(sales_rep_name)
   data_by_rep
 end
 
-def determine_multiplier(deal)
-  if deal["has_2x_multiplier"] == 1
+def determine_multiplier(num)
+  if num == 1
     return 2
   else
     return 1
@@ -43,7 +43,7 @@ def filter_by_date(deal_data, start_date, end_date)
   end_date = Date.parse(end_date)
 
   deal_data.select do |deal|
-    date = Date.parse(deal[:date])
+    date = Date.parse(deal["date"])
     date >= start_date && date <= end_date
   end
 end

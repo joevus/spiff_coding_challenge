@@ -9,20 +9,20 @@ RSpec.describe 'calculate_commission' do
   let(:example_deal_data) {
     [
       {
-        "id": 1111,
-        "sales_rep_name": "Melissa",
-        "date": "2023-01-15",
-        "quantity_products_sold": 7,
-        "product_id": 20006,
-        "has_2x_multiplier": 0
+        "id" => 1111,
+        "sales_rep_name" => "Melissa",
+        "date" => "2023-01-15",
+        "quantity_products_sold" => 7,
+        "product_id" => 20006,
+        "has_2x_multiplier" => 0
       },
       {
-        "id": 1119,
-        "sales_rep_name": "Melissa",
-        "date": "2023-05-15",
-        "quantity_products_sold": 11,
-        "product_id": 20010,
-        "has_2x_multiplier": 0
+        "id" => 1119,
+        "sales_rep_name" => "Melissa",
+        "date" => "2023-05-15",
+        "quantity_products_sold" => 11,
+        "product_id" => 20010,
+        "has_2x_multiplier" => 0
       }
     ]
   }
@@ -50,34 +50,12 @@ RSpec.describe 'calculate_commission' do
   end
 
   describe 'determine_multiplier' do
-    let(:deal_with_2x) {
-      {
-        "id" => 10047,
-        "sales_rep_name" => "Carol",
-        "date" => "2023-01-15",
-        "quantity_products_sold" => 1,
-        "product_id" => 20002,
-        "has_2x_multiplier" => 1
-      }
-    }
-
-    let(:deal_without_2x) {
-      {
-        "id" => 10048,
-        "sales_rep_name" => "Carol",
-        "date" => "2023-06-15",
-        "quantity_products_sold" => 7,
-        "product_id" => 20003,
-        "has_2x_multiplier" => 0
-      }
-    }
-
-    it 'should return 2 if deal has 2xmultiplier' do
-      expect(determine_multiplier(deal_with_2x)).to eq(2)
+    it 'should return 2 if given 1' do
+      expect(determine_multiplier(1)).to eq(2)
     end
 
-    it 'should return 1 if deal does not have 2x multiplier' do
-      expect(determine_multiplier(deal_without_2x)).to eq(1)
+    it 'should return 1 if given 0' do
+      expect(determine_multiplier(0)).to eq(1)
     end
   end
 
