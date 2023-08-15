@@ -29,7 +29,7 @@ RSpec.describe 'calculate_commission' do
 
   it 'should calculate commission' do
     # Calculation for Carol
-    # Quantity * Price * Commission Rate
+    # Quantity * Product Amount * Commission Rate * 2x Multiplier
     # Deal 10027: 5 * 8000 * 0.1 = 4000
     # Deal 10037: 2 * 3000 * 0.08 = 480
     # Deal 10047: 1 * 1000 * 0.06 = 60 * 2 (has_2x_multiplier) = 120
@@ -59,31 +59,17 @@ RSpec.describe 'calculate_commission' do
 
   describe 'product_data' do
     let(:expected_product_data) {
-      [
-        {
-          "id" => 20001,
-          "name" => "Product_1",
-          "product_amount" => 1000,
-          "commission_rate" => 0.05
-        },
-        {
-          "id" => 20002,
-          "name" => "Product_2",
-          "product_amount" => 1000,
-          "commission_rate" => 0.06
-        }
-      ]
+      {
+        "id" => 20001,
+        "name" => "Product_1",
+        "product_amount" => 1000,
+        "commission_rate" => 0.05
+      }
     }
 
     it 'should retrieve product data by product id' do
       # queries from data/products.json
-      expect(product_data([20001, 20002])).to eq(expected_product_data)
-    end
-  end
-
-  describe 'product_ids' do
-    it 'should retrieve product ids' do
-      expect(product_ids(example_deal_data)).to eq([20006, 20010])
+      expect(product_data(20001)).to eq(expected_product_data)
     end
   end
 end
