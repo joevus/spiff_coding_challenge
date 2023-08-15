@@ -41,6 +41,7 @@ RSpec.describe 'calculate_commission' do
 
   describe 'deal_data' do
     it 'should retrieve deal data by sales rep name' do
+      # This queries from data/deals.json
       carol_deal_data = deal_data(sales_rep_name)
 
       expect(carol_deal_data.length).to eq(4)
@@ -53,6 +54,30 @@ RSpec.describe 'calculate_commission' do
       filtered_deal_data = filter_by_date(example_deal_data, start_date, end_date)
 
       expect(filtered_deal_data.length).to eq(1)
+    end
+  end
+
+  describe 'product_data' do
+    let(:expected_product_data) {
+      [
+        {
+          "id" => 20001,
+          "name" => "Product_1",
+          "product_amount" => 1000,
+          "commission_rate" => 0.05
+        },
+        {
+          "id" => 20002,
+          "name" => "Product_2",
+          "product_amount" => 1000,
+          "commission_rate" => 0.06
+        }
+      ]
+    }
+
+    it 'should retrieve product data by product id' do
+      # queries from data/products.json
+      expect(product_data([20001, 20002])).to eq(expected_product_data)
     end
   end
 

@@ -25,6 +25,13 @@ def filter_by_date(deal_data, start_date, end_date)
   end
 end
 
+def product_data(product_ids)
+  file = File.read('data/products.json')
+  data = JSON.parse(file)
+
+  data.select { |product| product_ids.include?(product["id"])}
+end
+
 def product_ids(deal_data)
   deal_data.map { |deal| deal[:product_id] }
 end
