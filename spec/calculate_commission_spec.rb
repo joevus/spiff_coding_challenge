@@ -39,6 +39,22 @@ RSpec.describe 'calculate_commission' do
     expect(calculate_commission(sales_rep_name, start_date, end_date)).to eq(4600)
   end
 
+  
+  it 'should return warning message if sales rep does not exist' do
+    expect(calculate_commission(non_existent_name, start_date, end_date)).to eq("Sales rep does not exist")
+  end
+  
+  context 'David test case' do
+    let(:sales_rep_name) { "David"}
+    let(:start_date) { "2023-04-01"}
+    let(:end_date) { "2023-06-30"}
+
+    it "should calculate commission for David" do
+      expect(calculate_commission(sales_rep_name, start_date, end_date)).to eq(90090)
+    end
+  end
+  
+  
   describe 'deal_data' do
     it 'should retrieve deal data by sales rep name' do
       # This queries from data/deals.json
@@ -80,6 +96,24 @@ RSpec.describe 'calculate_commission' do
     it 'should retrieve product data by product id' do
       # queries from data/products.json
       expect(product_data(20001)).to eq(expected_product_data)
+    end
+  end
+
+  describe 'subtotal' do
+    let(:example_deal_data) {
+      {
+        "id" => 10001,
+        "sales_rep_name" => "David",
+        "date" => "2023-04-15",
+        "quantity_products_sold" => 3,
+        "product_id" => 20007,
+        "has_2x_multiplier" => 0
+      }
+    }
+    it 'should calculate subtotal' do
+      # Deal 10001: 3 * 13000 * 0.11 * 1 = 4290
+
+      expect(subtotal(example_deal_data)).to eq(4290)
     end
   end
 end
