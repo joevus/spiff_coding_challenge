@@ -30,6 +30,14 @@ def deal_data(sales_rep_name)
   data_by_rep
 end
 
+def determine_multiplier(deal)
+  if deal["has_2x_multiplier"] == 1
+    return 2
+  else
+    return 1
+  end
+end
+
 def filter_by_date(deal_data, start_date, end_date)
   start_date = Date.parse(start_date)
   end_date = Date.parse(end_date)

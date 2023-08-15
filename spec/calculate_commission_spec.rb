@@ -49,6 +49,38 @@ RSpec.describe 'calculate_commission' do
     end
   end
 
+  describe 'determine_multiplier' do
+    let(:deal_with_2x) {
+      {
+        "id" => 10047,
+        "sales_rep_name" => "Carol",
+        "date" => "2023-01-15",
+        "quantity_products_sold" => 1,
+        "product_id" => 20002,
+        "has_2x_multiplier" => 1
+      }
+    }
+
+    let(:deal_without_2x) {
+      {
+        "id" => 10048,
+        "sales_rep_name" => "Carol",
+        "date" => "2023-06-15",
+        "quantity_products_sold" => 7,
+        "product_id" => 20003,
+        "has_2x_multiplier" => 0
+      }
+    }
+
+    it 'should return 2 if deal has 2xmultiplier' do
+      expect(determine_multiplier(deal_with_2x)).to eq(2)
+    end
+
+    it 'should return 1 if deal does not have 2x multiplier' do
+      expect(determine_multiplier(deal_without_2x)).to eq(1)
+    end
+  end
+
   describe 'filter_by_date' do
     it 'should filter deal for date window' do
       filtered_deal_data = filter_by_date(example_deal_data, start_date, end_date)
